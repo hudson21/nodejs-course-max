@@ -1,0 +1,9 @@
+REPL: 
+    Read --> Read User Input
+    Eval --> Evaluate User Input
+    Print --> Print Output(Result)
+    Loop --> Wait for new Input
+
+Execute Files:
+    used for real apps
+    Predictable sequence of steps
