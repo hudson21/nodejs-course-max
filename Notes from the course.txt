@@ -7,3 +7,12 @@ REPL:
 Execute Files:
     used for real apps
     Predictable sequence of steps
+
+HTTP, HTTPS --> Hyper Text Transfer Protocol: A protocol for transfering data which is understood by Browser and Server
+
+Core Modules:
+1. http --> Launch a server, send requests
+2. https --> Launch a SSL server
+3. fs --> 
+4. path -->
+5. os -->
