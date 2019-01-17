@@ -16,3 +16,11 @@ Core Modules:
 3. fs --> 
 4. path -->
 5. os -->
+
+============================= Event Loop =====================================
+Keeps on running as long as there are event listeners registered
+
+============================= Streams and Buffers ============================
+Buffer: It is like a container that allows you to hold multiple chunks before they are released or done
+
+============================= Single Thread, Event Loop & Blocking Code ================================
