@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-course-max",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hudson21/nodejs-course-max.git"
+  },
+  "author": "Carlos Miguel Hudson Díaz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hudson21/nodejs-course-max/issues"
+  },
+  "homepage": "https://github.com/hudson21/nodejs-course-max#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}

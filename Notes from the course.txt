@@ -24,3 +24,41 @@ Keeps on running as long as there are event listeners registered
 Buffer: It is like a container that allows you to hold multiple chunks before they are released or done
 
 ============================= Single Thread, Event Loop & Blocking Code ================================
+--- nodemon package: npm install nodemon  (--save-dev) development dependency
+                                          (--save) production dependency
+                                          (-g) globally in your machine
+
+
+- Types of Errors
+
++ Syntax Errors:
++ Runtime Errors: 
++ Logical Errors: 
+
+
+============================ Debug =================================================
+Debug --> Add Configuration --> Nodejs:
+
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceFolder}\\app.js",
+            "restart": true,
+            "runtimeExecutable": "nodemon",
+            "console": "integratedTerminal"
+        }
+    ]
+}
+
+changing variables in debug environment: view --> debug
+
+============================================  Express ==================================================================
+npm install 
+
