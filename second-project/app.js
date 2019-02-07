@@ -4,6 +4,11 @@ const express = require('express');
 
 const app = express();
 
+//Use allows us to use middlewares
+app.use((req, res, next) => {
+    console.log('In the middleware');
+});
+
 const server = http.createServer(app);
 
 server.listen(3000);
