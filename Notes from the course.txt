@@ -60,5 +60,5 @@ Debug --> Add Configuration --> Nodejs:
 changing variables in debug environment: view --> debug
 
 ============================================  Express ==================================================================
-npm install 
+npm install --save express
 
