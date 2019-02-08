@@ -61,4 +61,5 @@ changing variables in debug environment: view --> debug
 
 ============================================  Express ==================================================================
 npm install --save express
+npm install --save body-parser
 
