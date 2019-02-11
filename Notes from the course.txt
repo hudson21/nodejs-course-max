@@ -66,3 +66,6 @@ npm install --save body-parser
 __dirname: It is a global variable that holds the absolute path of our operating system
 
 res.sendFile(path.join(__dirname, 'views', 'shop.html'));
+
+============================================ Templating Engines ========================================================
+HTMLish Template --> 
