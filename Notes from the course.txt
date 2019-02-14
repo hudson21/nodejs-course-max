@@ -69,3 +69,4 @@ res.sendFile(path.join(__dirname, 'views', 'shop.html'));
 
 ============================================ Templating Engines ========================================================
 HTMLish Template --> 
+npm install --save ejs pug express-handlebars
