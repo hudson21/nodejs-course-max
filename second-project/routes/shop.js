@@ -11,7 +11,16 @@ router.get('/', (req, res, next) => {
     /*console.log(adminData.products);
     res.sendFile(path.join(__dirname, '../', 'views', 'shop.html'));*/
     const products = adminData.products;
-    res.render('shop', {prods: products, pageTitle: 'Shop', path: '/'}); //This is to rende the templating engine provided in app.js (in this case pug)
+    //This is to render the templating engine provided in app.js (it is appliable for any templating engine)
+    res.render('shop', {
+        prods: products, 
+        pageTitle: 'Shop', 
+        path: '/', 
+        hasProducts: products.length > 0,
+        activeShop: true,
+        productCSS: true,
+        //layout: false //this special key is understod by handlebars
+    }); 
 });
 
 module.exports = router;

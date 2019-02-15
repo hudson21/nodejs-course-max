@@ -4,13 +4,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 //This is for express-handlerbars 
-const expressHbs = require('express-handlebars');
+//const expressHbs = require('express-handlebars');
 
 const app = express();
 
 //-------------------------------------------This is for express-handlebars-----------------------------------
-app.engine('hbs', expressHbs);
-app.set('view engine', 'hbs');
+/*app.engine('hbs', 
+expressHbs({
+    layoutsDir: 'views/layouts', 
+    defaultLayout: 'main-layout', 
+    extname: 'hbs'
+}));*/
+app.set('view engine', 'ejs');
 app.set('views', 'views');
 //-----------------------------------------------This is for pug----------------------------------------------
 //Set a global configuration value for pug
