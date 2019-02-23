@@ -70,3 +70,11 @@ res.sendFile(path.join(__dirname, 'views', 'shop.html'));
 ============================================ Templating Engines ========================================================
 HTMLish Template --> 
 npm install --save ejs pug express-handlebars
+
+===================================== MVC ===========================================
+Separation of Concerns
+Models: Represent your data n your code. Work with your data(saving, fetching, etc...)
+Views: What the user sees 
+Controllers: Connecting your models and your views. Contains the "in-between" logic
+
+

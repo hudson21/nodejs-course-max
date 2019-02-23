@@ -3,6 +3,8 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const errorController = require('./controllers/404');
+
 //This is for express-handlerbars 
 //const expressHbs = require('express-handlebars');
 
@@ -23,7 +25,7 @@ app.set('views', 'views');
 //app.set('views', 'views');
 
 //Routes
-const adminData = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 //This function registers a middleware
@@ -31,13 +33,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));//The user will be able to access to the public folder 
 
 //Routes
-app.use('/admin', adminData.routes);
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
-app.use((req, res, next) => {
-    //res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-    res.status(404).render('404', {pageTitle: 'Page Not Found'});
-}); 
+app.use(errorController.get404); 
 
 app.listen(4000, () => {
     console.log('Listening on port 4000');
