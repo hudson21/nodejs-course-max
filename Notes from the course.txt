@@ -110,3 +110,5 @@ It is an Object Relational Mapping Library (ORM)
 
 npm install --save sequelize
 
+Associations: 
+
