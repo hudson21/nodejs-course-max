@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const errorController = require('./controllers/404');
-
+const db = require('./helpers/database');
 //This is for express-handlerbars 
 //const expressHbs = require('express-handlebars');
 
@@ -27,6 +27,7 @@ app.set('views', 'views');
 //Routes
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+
 
 //This function registers a middleware
 app.use(bodyParser.urlencoded({ extended: false }));

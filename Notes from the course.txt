@@ -77,4 +77,31 @@ Models: Represent your data n your code. Work with your data(saving, fetching, e
 Views: What the user sees 
 Controllers: Connecting your models and your views. Contains the "in-between" logic
 
+===================================== Databases =====================================
+Horizontal Scaling: Add more servers (and merge Data into one Database)
+
+Vertical Scaling: Improve Server capacity/ Hardware (Adding more CPU, Memory, etc);
+
+
+SQL vs NoSQL
+SQL: 
+    1. Data uses Schemas
+    2. Relations
+    3. Data is distributed across multiple tables
+    4. Horizontal scaling is difficult/impossible; Vertical scaling is possible
+NoSQL:
+    1.Schema-less 
+    2.No (or very few) Relations
+
+    3.Data is typically merged/nested in a few collections
+    4.Greate performance for mass read and write requests
+
+npm install --save mysql2
+
+
+db.execute('SELECT * FROM products')
+.then(result => {console.log(result[0], result[1])})
+.catch(err => console.log(err));
+
+
 
