@@ -104,4 +104,9 @@ db.execute('SELECT * FROM products')
 .catch(err => console.log(err));
 
 
+================================ SEQUELIZE ===============================================
+What is Sequelize ?
+It is an Object Relational Mapping Library (ORM)
+
+npm install --save sequelize
 
