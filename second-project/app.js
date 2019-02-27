@@ -11,6 +11,8 @@ const Product = require('./models/product');
 const User = require('./models/user');
 const Cart = require('./models/cart');
 const CartItem = require('./models/cart-item');
+const Order = require('./models/order');
+const OrderItem = require('./models/order-item');
 
 //This is for express-handlerbars 
 //const expressHbs = require('express-handlebars');
@@ -62,6 +64,10 @@ User.hasOne(Cart);
 Cart.belongsTo(User);//Optional
 Cart.belongsToMany(Product, { through: CartItem});
 Product.belongsToMany(Cart, { through: CartItem});
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product, { through: OrderItem });
+Product.belongsToMany(Order, { through: OrderItem });
 
 //It looks for all the models that you have created and creates the models
 sequelize.sync(/*{force: true}*/)//force true creates again the tables
