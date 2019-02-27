@@ -110,5 +110,32 @@ It is an Object Relational Mapping Library (ORM)
 
 npm install --save sequelize
 
-Associations: 
+Associations: It is the similar to Table Relationships (one-to-many, one-to-one, many-to-many)
+
+================================ mongoDB =================================================
+Schemaless
+Table = Collections
+Rows = Documents
+
+Relations - Options:
+    1. Nested/Embedded Documents
+        {
+            username: 'Carlos',
+            age: 29,
+            address: {
+                street: 'Second Street',
+                city: 'New York'
+            }
+        }
+    2. References
+        Customers : {
+            username: 'Hudson',
+            favBooks: ['id1','id2']
+        }
+        Books: {
+            _id: 'id1',
+            name: 'Lord of the Rings 1'
+        }
+
+
 
