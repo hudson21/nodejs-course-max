@@ -1,6 +1,18 @@
-const Sequelize = require('sequelize');
+const getDb = require('../helpers/database').getDb;
 
-const sequelize = require('../helpers/database');
+class Product {
+  constructor(title, price, description, imageUrl) {
+    this.title = title;
+    this.price = price;
+    this.description = description;
+    this.imageUrl = imageUrl;
+  }
+
+  save() {
+    const db = getDb();
+    db.collection('products');
+  }
+}
 
 const Product = sequelize.define('product', {
   id: {
