@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const errorController = require('./controllers/404');
-const mongoConnect = require('./helpers/database');
+const mongoConnect = require('./helpers/database').mongoConnect;
 
 //This is for express-handlerbars 
 //const expressHbs = require('express-handlebars');
@@ -27,7 +27,7 @@ app.set('views', 'views');
 
 //Routes
 const adminRoutes = require('./routes/admin');
-//const shopRoutes = require('./routes/shop');
+const shopRoutes = require('./routes/shop');
 
 
 //This function registers a middleware
@@ -42,14 +42,17 @@ app.use((req, res, next) => {
         next();//We can continue with out next step
     })
     .catch(err => console.log(err));*/
+    next();
 });
 
 //Routes
 app.use('/admin', adminRoutes);
-//app.use(shopRoutes);
+app.use(shopRoutes);
 
 app.use(errorController.get404); 
 
 mongoConnect(() => {
-    app.listen(4000);
+    app.listen(4000, () => {
+        console.log('Listening on port 4000');
+    });
 });
