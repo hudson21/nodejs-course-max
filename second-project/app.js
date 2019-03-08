@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));//The user will be able 
 app.use((req, res, next) => {
     User.findById('5c7defcd349c852d8c025a64')
     .then(user => {
-        req.user = user;//Here we are adding a new field to out request object
+        req.user = new User(user.name, user.email, user.cart, user._id);//Here we are adding a new field to out request object
         console.log('user', user);
         next();//We can continue with out next step
     })
