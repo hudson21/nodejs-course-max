@@ -139,3 +139,7 @@ Relations - Options:
 
 npm install --save mongodb
 
+============================================== Mongoose =================================================================
+Object Document Mapping Library
+
+npm install --save mongoose

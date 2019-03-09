@@ -2,9 +2,9 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const errorController = require('./controllers/404');
-const mongoConnect = require('./helpers/database').mongoConnect;
 const User = require('./models/user');
 
 //This is for express-handlerbars 
@@ -36,9 +36,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));//The user will be able to access to the public folder 
 // This only returns a middleware. For incoming requests this function is gonne be executed
 app.use((req, res, next) => {
-    User.findById('5c7defcd349c852d8c025a64')
+    User.findById('5c8348da52730353cc1fa48c')
     .then(user => {
-        req.user = new User(user.name, user.email, user.cart, user._id);//Here we are adding a new field to out request object
+        req.user = user;
         console.log('user', user);
         next();//We can continue with out next step
     })
@@ -52,8 +52,22 @@ app.use(shopRoutes);
 
 app.use(errorController.get404); 
 
-mongoConnect(() => {
+mongoose.connect('mongodb+srv://AtlasAdmin:flute5816@cluster0-gucrc.mongodb.net/shop?retryWrites=true')
+.then(result => {
+    User.findOne().then(user => {
+        if (!user) {
+            const user = new User({
+                name: 'Hudson',
+                email: 'carlos.hudson@hp.com',
+                cart: {
+                    items: []
+                }
+            });
+            user.save();
+        }
+    });
     app.listen(4000, () => {
         console.log('Listening on port 4000');
     });
-});
+})
+.catch(err => console.log(err));

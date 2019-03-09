@@ -10,15 +10,15 @@ router.get('/products', shopController.getProducts);
 // /products/:id => GET
 router.get('/products/:productId', shopController.getProduct);
 // /cart => GET
-router.get('/cart', shopController.getCart);
+//router.get('/cart', shopController.getCart);
 // /cart => POST
-router.post('/cart', shopController.postCart); 
+//router.post('/cart', shopController.postCart); 
 // /cart-delete-item => POST
-router.post('/cart-delete-item', shopController.postCartDeleteProduct);
+//router.post('/cart-delete-item', shopController.postCartDeleteProduct);
 
-router.post('/create-order', shopController.postOrder);
+//router.post('/create-order', shopController.postOrder);
 // /orders => GET
-router.get('/orders', shopController.getOrders);
+//router.get('/orders', shopController.getOrders);
 // /checkout => GET
 //router.get('/checkout', shopController.getCheckout);
 
