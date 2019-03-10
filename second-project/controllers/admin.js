@@ -21,7 +21,8 @@ exports.postAddProduct = (req, res, next) => {
         title, 
         price,
         description, 
-        imageUrl
+        imageUrl,
+        userId: req.user
     });
     product.save()
     .then(result => { 
@@ -79,7 +80,10 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
     Product.find()
+    //.select('title price -_id')
+    //.populate('userId', 'name') // it allows to populate a certain field (all the detail information)
     .then(products => {
+        //console.log(products);
         res.render('admin/products', {
             prods: products, 
             pageTitle: 'Admin Products', 

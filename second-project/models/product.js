@@ -18,6 +18,11 @@ const productSchema = new Schema({
   imageUrl: {
     type: String,
     required: true
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User', // Here you use the name of the model you wanna make the reference
+    required: true
   }
 });
 
