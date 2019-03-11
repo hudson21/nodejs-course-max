@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 
 const authController = require('../controllers/auth');
 
@@ -10,4 +10,4 @@ router.post('/login', authController.postLogin);
 
 router.post('/logout', authController.postLogout);
 
-module.exports  = router;
+module.exports = router;
