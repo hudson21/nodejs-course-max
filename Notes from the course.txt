@@ -153,3 +153,5 @@ npm install --save express-session
 
 checkout the documentation of express-session   
 npm install --save connect-mongodb-session
+
+============================================== Adding Authentication =====================================================
