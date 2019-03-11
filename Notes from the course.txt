@@ -143,3 +143,13 @@ npm install --save mongodb
 Object Document Mapping Library
 
 npm install --save mongoose
+
+
+============================================== Cookie ====================================================================
+What is a cookie ? 
+
+What is a Session ?
+npm install --save express-session
+
+checkout the documentation of express-session   
+npm install --save connect-mongodb-session
