@@ -155,3 +155,4 @@ checkout the documentation of express-session
 npm install --save connect-mongodb-session
 
 ============================================== Adding Authentication =====================================================
+npm install --save bcryptjs
