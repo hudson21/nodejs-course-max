@@ -156,3 +156,10 @@ npm install --save connect-mongodb-session
 
 ============================================== Adding Authentication =====================================================
 npm install --save bcryptjs
+
+=========================================CSRF Attacks===========================================
+Cross Site Request Forgery
+npm install --save csurf
+CSRF token: A token we can embed into our pages for every request that does something on the 
+backend
+
