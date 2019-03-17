@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
+const flash = require('connect-flash');
 
 const errorController = require('./controllers/404');
 const User = require('./models/user');
@@ -40,7 +41,9 @@ app.use(
   })
 );
 app.use(csrfProtection);
+app.use(flash()); //You need to do it after initializing the session
 
+//This is for adding the user to the request (express)
 app.use((req, res, next) => {
   if (!req.session.user) {
     return next();

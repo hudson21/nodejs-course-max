@@ -163,3 +163,9 @@ npm install --save csurf
 CSRF token: A token we can embed into our pages for every request that does something on the 
 backend
 
+npm install --save connect-flash
+
+=========================================Sending Emails===========================================
+SendGrid
+npm install --save nodemailer nodemailer-sendgrid-transport
+Find out more about nodemailer
