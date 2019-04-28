@@ -169,3 +169,8 @@ npm install --save connect-flash
 SendGrid
 npm install --save nodemailer nodemailer-sendgrid-transport
 Find out more about nodemailer
+
+=========================================Understanding Validation===========================================
+npm install --save express-validator 
+
+Sanitizing data means for example: getting rid of whi spaces, converting toLowercase, etc
