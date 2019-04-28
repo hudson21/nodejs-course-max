@@ -174,3 +174,5 @@ Find out more about nodemailer
 npm install --save express-validator 
 
 Sanitizing data means for example: getting rid of whi spaces, converting toLowercase, etc
+
+=========================================Error Handling===========================================
