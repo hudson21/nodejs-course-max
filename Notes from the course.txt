@@ -189,3 +189,10 @@ You need to call next(new Error('Error you want to send to be rendered by the ex
                             422         Invalid input
 5xx (Server-side error)     500         Server-side error
 
+=========================================File Upload and Download===========================================
+if we only use text in forms the middleware used is bodyParse(for plain text)
+npm install --save multer //another third-party library that parses incoming requests for files (File requests)
+
+IN FORMS: 
+application/x-www-form-urlencoded //This is the default setting
+multipart/form-data //It is the one in charge for file requests
