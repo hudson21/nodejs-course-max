@@ -22,14 +22,14 @@ const MONGODB_URI =
   });
   const csrfProtection = csrf();
   
-  const fileStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'images');
+  var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'images')
     },
-    filename: (req, file, cb) => {
-      cb(null, new Date().toISOString() + '-' + file.originalname);
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + file.originalname);
     }
-  });
+  })
   
   const fileFilter = (req, file, cb) => {
     if (
@@ -51,11 +51,11 @@ const MONGODB_URI =
   const authRoutes = require('./routes/auth');
   
   app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(
-    multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
-  );
+  app.use(multer({ storage: storage, fileFilter: fileFilter }).single('image'));
+
   app.use(express.static(path.join(__dirname, 'public')));
   app.use('/images', express.static(path.join(__dirname, 'images')));
+  
   app.use(
     session({
       secret: 'my secret',
