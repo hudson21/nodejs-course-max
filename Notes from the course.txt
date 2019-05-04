@@ -196,3 +196,8 @@ npm install --save multer //another third-party library that parses incoming req
 IN FORMS: 
 application/x-www-form-urlencoded //This is the default setting
 multipart/form-data //It is the one in charge for file requests
+
+------------------PDFKit
+npm install --save pdfkit
+
+http://pdfkit.org/docs/text.html
