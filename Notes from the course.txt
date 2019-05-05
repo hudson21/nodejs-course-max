@@ -217,3 +217,5 @@ When using Sequelize, the official docs describe how to add pagination: http://d
 
 ========================================= Asynchronous Requests ===========================================
 what are ? : 
+
+========================================= Stripe ===========================================
