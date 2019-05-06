@@ -219,3 +219,4 @@ When using Sequelize, the official docs describe how to add pagination: http://d
 what are ? : 
 
 ========================================= Stripe ===========================================
+npm install --save stripe
