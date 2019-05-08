@@ -222,3 +222,28 @@ what are ? :
 npm install --save stripe
 
 ========================================= REST APIS ===========================================
+HTTP Methods: 
+    1. GET 
+    2. POST 
+    3. PUT: Put a resource onto the Server
+    4. PATCH: Update parts of an existing Resource on the Server
+    5. DELETE
+    6. OPTIONS: Determine whether follow-up Request is allowed (send automatically)
+
+Rest Principles:
+    1. Uniform Interface: Clearly defined API endpoints with clearly defined request + response data structure
+    2. Stateless Interactions: Server and client don´t store any connection history, every request is handled separately
+
+CORS: Cross Origin Resource Sharing
+
+    Client                                      Server
+localhost:4000         Cors Error            localhost:3000
+
+
+//CORST Settings
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next(); 
+});
