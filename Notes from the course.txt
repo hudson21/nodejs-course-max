@@ -253,3 +253,17 @@ What is a Token?
     JSON Data + Signature = JSON Web Token(JWT);
 
 npm install --save jsonwebtoken
+
+========================================= Async Await ===========================================
+
+========================================= Web Sockets ===========================================
+
+How it works? : 
+
+WebSockets instead of Http --> Push Data from the Server to the Client
+
+You can use both together in one and the same Node App.
+
+https://socket.io
+
+Install Socket.io on the server and the client

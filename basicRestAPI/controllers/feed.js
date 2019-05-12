@@ -3,37 +3,34 @@ const path = require('path');
 
 const {validationResult} = require('express-validator/check');
 
+const io = require('../socket');
 const Post = require('../models/post');
 const User = require('../models/user');
 
-exports.getPosts = (req, res, next) => {
+exports.getPosts = async (req, res, next) => {
     const currentPage = req.query.page || 1;
     const perPage = 2;
-    let totalItems;
-    Post.find()
-        .countDocuments()
-        .then(count => {
-            totalItems = count;
-            return Post.find()
-                .skip((currentPage - 1) * perPage)
-                .limit(perPage);
-        })
-        .then(posts => {
-            res.status(200).json({
-                message: 'Fetched posts successfully', 
-                posts,
-                totalItems
-            });
-        })
-        .catch(err => {
-            if (!err.statusCode) {
-                err.statusCode = 500;
-            }
-            next(err); 
-        })
+
+    
+    try {
+        const totalItems = await Post.find().countDocuments();
+        const posts = await Post.find().skip((currentPage - 1) * perPage).limit(perPage);
+        
+        res.status(200).json({
+            message: 'Fetched posts successfully', 
+            posts,
+            totalItems
+        });
+        
+    } catch(err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err); 
+    }
 };
 
-exports.postPost = (req, res, next) => {
+exports.postPost = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const error = new Error('Validation failed, entered data is incorrect.');
@@ -48,37 +45,32 @@ exports.postPost = (req, res, next) => {
     const imageUrl = req.file.path;
     const title = req.body.title;
     const content = req.body.content;
-    let creator;
     const post = new Post({
       title: title,
       content: content,
       imageUrl: imageUrl,
       creator: req.userId
     });
-    post
-      .save()
-      .then(result => {
-        return User.findById(req.userId);
-      })
-      .then(user => {
-        creator = user;
-        console.log('creator', creator);
-        user.posts.push(post);
-        return user.save();
-      })
-      .then(result => {
-        res.status(201).json({
-          message: 'Post created successfully!',
-          post,
-          creator: { _id: creator._id, name: creator.name }
-        });
-      })
-      .catch(err => {
-        if (!err.statusCode) {
-          err.statusCode = 500;
-        }
-        next(err);
+    try {
+      await post.save();
+      const user = await User.findById(req.userId);
+      user.posts.push(post);
+      await user.save();
+      io.getIO().emit('posts', {
+        action: 'create',
+        post: { ...post._doc, creator: { _id: req.userId, name: user.name } }
       });
+      res.status(201).json({
+        message: 'Post created successfully!',
+        post: post,
+        creator: { _id: user._id, name: user.name }
+      });
+    } catch (err) {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    }
   };
 
 exports.getPost = (req, res, next) => {
