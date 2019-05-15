@@ -267,3 +267,11 @@ You can use both together in one and the same Node App.
 https://socket.io
 
 Install Socket.io on the server and the client
+npm install --save socket.io Server
+npm install --save socket.io-client
+
+========================================= GraphQL ===========================================
++ REST API: Stateless, client-independent API for exchanging data
++ GraphQL API: Stateless, client-independent API for exchanging data with higher query flexibility.
+
+What is GraphQL: 
