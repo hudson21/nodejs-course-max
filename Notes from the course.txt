@@ -275,3 +275,19 @@ npm install --save socket.io-client
 + GraphQL API: Stateless, client-independent API for exchanging data with higher query flexibility.
 
 What is GraphQL: 
+
+A GraphQL Query:
+    {
+        query { --> operation type 
+            (Operation endpoint)user { --> other types: mutation subscription
+                                name --> Requested fields
+                                age  -->
+                            }
+        }
+    }
+
+Query ---> Retrieve Data("GET") Like Routes
+Mutation ---> Manipulate Data ("POST", "PUT", "PATCH", "DELETE"); Like Routes
+Subscription ---> Set up realtime connection via Websockets    Like Routes
+
+Resolvers(contain your server-side logic) Like Controllers
