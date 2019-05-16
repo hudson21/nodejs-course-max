@@ -4,9 +4,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const graphqlHttp = require('express-graphql');
 
-const feedRoutes = require('./routes/feed');
-const authRoutes = require('./routes/auth');
+const graphQLSchema = require('./graphql/schema');
+const graphQLResolver = require('./graphql/resolvers');
 
 const MONGODB_URI =
   'mongodb+srv://AtlasAdmin:flute5816@cluster0-gucrc.mongodb.net/messages';
@@ -47,9 +48,10 @@ app.use(bodyParser.json());// application/json
 app.use(multer({ storage: storage, fileFilter: fileFilter }).single('image'));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-
-app.use('/feed', feedRoutes);
-app.use('/auth', authRoutes);
+app.use('/graphql', graphqlHttp({
+  schema: graphQLSchema,
+  rootValue: graphQLResolver
+}));
 
 //Error Handling Middleware
 app.use((error, req, res, next) => {
@@ -62,13 +64,8 @@ app.use((error, req, res, next) => {
 
 mongoose.connect(MONGODB_URI)
 .then(result => {
-    const server = app.listen(8080, () => {
+    app.listen(8080, () => {
         console.log('Listening on port 8080');
-    });
-    //This sets socket.io
-    const io = require('./socket').init(server);
-    io.on('connection', socket => {
-      console.log('Client connected');
     });
 })
 .catch(err => console.log(err));

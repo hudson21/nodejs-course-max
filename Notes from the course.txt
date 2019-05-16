@@ -291,3 +291,5 @@ Mutation ---> Manipulate Data ("POST", "PUT", "PATCH", "DELETE"); Like Routes
 Subscription ---> Set up realtime connection via Websockets    Like Routes
 
 Resolvers(contain your server-side logic) Like Controllers
+
+npm install --save graphql express-graphql
