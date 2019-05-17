@@ -4,9 +4,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const graphqlHttp = require('express-graphql');
 
-const feedRoutes = require('./routes/feed');
-const authRoutes = require('./routes/auth');
+const graphQLSchema = require('./graphql/schema');
+const graphQLResolver = require('./graphql/resolvers');
 
 const MONGODB_URI =
   'mongodb+srv://AtlasAdmin:flute5816@cluster0-gucrc.mongodb.net/messages';
@@ -39,6 +40,10 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    //This is for graphQL Settings on the client (OPTIONS)
+    if (req.method === 'OPTIONS') {
+      return res.sendStatus(200);
+    }
     next(); 
 });
 
@@ -47,9 +52,21 @@ app.use(bodyParser.json());// application/json
 app.use(multer({ storage: storage, fileFilter: fileFilter }).single('image'));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-
-app.use('/feed', feedRoutes);
-app.use('/auth', authRoutes);
+app.use('/graphql', graphqlHttp({
+  schema: graphQLSchema,
+  rootValue: graphQLResolver,
+  graphiql: true,
+  formatError(err) {
+    //Original error will be set by graphQL when it detecs and error throwing in your code
+    if (!err.originalError) {
+      return err;
+    }
+    const data = err.originalError.data;
+    const message = err.message || 'An error ocurred.';
+    const code = err.originalError.code || 500;
+    return { message, status: code, data };
+  }
+}));
 
 //Error Handling Middleware
 app.use((error, req, res, next) => {
@@ -62,13 +79,8 @@ app.use((error, req, res, next) => {
 
 mongoose.connect(MONGODB_URI)
 .then(result => {
-    const server = app.listen(8080, () => {
+    app.listen(8080, () => {
         console.log('Listening on port 8080');
-    });
-    //This sets socket.io
-    const io = require('./socket').init(server);
-    io.on('connection', socket => {
-      console.log('Client connected');
     });
 })
 .catch(err => console.log(err));
