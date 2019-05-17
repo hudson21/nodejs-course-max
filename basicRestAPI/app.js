@@ -8,6 +8,7 @@ const graphqlHttp = require('express-graphql');
 
 const graphQLSchema = require('./graphql/schema');
 const graphQLResolver = require('./graphql/resolvers');
+const auth = require('./middleware/auth');
 
 const MONGODB_URI =
   'mongodb+srv://AtlasAdmin:flute5816@cluster0-gucrc.mongodb.net/messages';
@@ -35,6 +36,8 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
+app.use(auth);
+
 //CORST Settings
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -46,6 +49,7 @@ app.use((req, res, next) => {
     }
     next(); 
 });
+
 
 //app.use(bodyParser.urlenconded()); // x-www-form-urencoded <form>
 app.use(bodyParser.json());// application/json
