@@ -1,0 +1,8 @@
+{
+    "env": {
+        "MONGO_USER": "AtlasAdmin",
+        "MONGO_PASSWORD": "flute5816",
+        "MONGO_DEFAULT_DATABASE": "shop",
+        "STRIPE_KEY": "sk_test_ixpXizC1SCU08Zz7hb0IHOFV"
+    }
+}

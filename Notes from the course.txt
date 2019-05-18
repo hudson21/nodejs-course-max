@@ -301,3 +301,51 @@ POSTMAN:
 }
 
 npm install --save validator
+
+========================================= Deployment ===========================================
+node helmet ---> Security
+npm install --save helmet
+
+node compression --> Compression of your app
+npm install --save compression
+
+Makes login request data really simple
+npm install --save morgan
+
+Using SSL/TLS:
+
+SSL/TLS Encryption
+
+openssl req -nodes -new -x509 -keyout server.key -out server.cert
+
+Common Name: localhost
+
+========================================= Heroku ===========================================
+Deployment Method: heroku git
+Install Heroku on your system
+heroku login (login with your account data)
+
+Insite of package.json:
+    "engines": {
+        "node": "version of nodejs you are using"
+    }
+Use compression on app.js if you are gonna deploy your app on Heroku
+Also dont read the certificates or the privateKey in app.js 
+
+create Procfile in the root project
+.gitignore --> node_modules
+git add .
+git commit -m "message you want"
+git push heroku master
+
+
+Heroku Dashboard --> Overview 
+
+Set your Environment variables
+    Settings --> config vars
+
+MongoDB Atlas Settings
+    Set your database to be reachable to a determined IP or any
+
+========================================= Node.js as a build tool Using npm ===========================================
+

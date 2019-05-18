@@ -1,4 +1,6 @@
 const path = require('path');
+const fs = require('fs');
+const https = require('https');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -8,6 +10,9 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
+const helmet = require('helmet');
+const compression = require('compression');
+const morgan = require('morgan');
 
 const errorController = require('./controllers/404');
 const shopController = require('./controllers/shop');
@@ -16,7 +21,7 @@ const isAuth = require('./middleware/is-auth');
 const User = require('./models/user');
 
 const MONGODB_URI =
-  'mongodb+srv://AtlasAdmin:flute5816@cluster0-gucrc.mongodb.net/shop';
+  `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-gucrc.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE  }`;
 
   const app = express();
   const store = new MongoDBStore({
@@ -24,6 +29,9 @@ const MONGODB_URI =
     collection: 'sessions'
   });
   const csrfProtection = csrf();
+
+  //const privateKey = fs.readFileSync('server.key');
+  //const certificate = fs.readFileSync('server.cert');
   
   var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -53,6 +61,15 @@ const MONGODB_URI =
   const shopRoutes = require('./routes/shop');
   const authRoutes = require('./routes/auth');
   
+  const accessLogStream = fs.createWriteStream(
+    path.join(__dirname, 'access.log'), 
+    {flags: 'a'}
+  );
+
+  app.use(helmet());
+  app.use(compression());
+  app.use(morgan('combined', {stream: accessLogStream}));
+
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(multer({ storage: storage, fileFilter: fileFilter }).single('image'));
 
@@ -124,8 +141,11 @@ const MONGODB_URI =
 mongoose
   .connect(MONGODB_URI)
   .then(result => {
-    app.listen(4000, () => {
-        console.log('Listening on port 4000');
+    /*https.createServer({ key: privateKey, cert: certificate }, app).listen(process.env.PORT || 4000, () => {
+        console.log(`Listening on port ${process.env.PORT || 4000}`);
+    });*/
+    app.listen(process.env.PORT || 4000, () => {
+      console.log(`Listening on port ${process.env.PORT || 4000}`);
     });
   })
   .catch(err => {
