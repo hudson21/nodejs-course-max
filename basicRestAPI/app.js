@@ -1,5 +1,4 @@
 const path = require('path');
-const fs = require('fs');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -10,6 +9,7 @@ const graphqlHttp = require('express-graphql');
 const graphQLSchema = require('./graphql/schema');
 const graphQLResolver = require('./graphql/resolvers');
 const auth = require('./middleware/auth');
+const { clearImage } = require('./helpers/file'); 
 
 const MONGODB_URI =
   'mongodb+srv://AtlasAdmin:flute5816@cluster0-gucrc.mongodb.net/messages';
@@ -103,7 +103,3 @@ mongoose.connect(MONGODB_URI)
 })
 .catch(err => console.log(err));
 
-const clearImage = filePath => {
-  filePath = path.join(__dirname, '..', filePath);
-  fs.unlink(filePath, err => console.log(err));
-};
