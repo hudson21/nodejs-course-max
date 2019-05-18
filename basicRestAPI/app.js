@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -36,8 +37,6 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
-app.use(auth);
-
 //CORST Settings
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -56,6 +55,8 @@ app.use(bodyParser.json());// application/json
 app.use(multer({ storage: storage, fileFilter: fileFilter }).single('image'));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
+app.use(auth);
+
 app.use('/graphql', graphqlHttp({
   schema: graphQLSchema,
   rootValue: graphQLResolver,
@@ -71,6 +72,19 @@ app.use('/graphql', graphqlHttp({
     return { message, status: code, data };
   }
 }));
+
+app.put('/post-image', (req, res, next) => {
+  if (!req.isAuth) {
+    throw new Error('Not authenticated');
+  }
+  if (!req.file) {
+    return res.status(200).json({message: 'No file provided!'});
+  }
+  if (req.body.oldPath) {
+    clearImage(req.body.oldPath);
+  }
+  return res.status(201).json({message: 'File stored.', filePath: req.file.path});
+});
 
 //Error Handling Middleware
 app.use((error, req, res, next) => {
@@ -88,3 +102,8 @@ mongoose.connect(MONGODB_URI)
     });
 })
 .catch(err => console.log(err));
+
+const clearImage = filePath => {
+  filePath = path.join(__dirname, '..', filePath);
+  fs.unlink(filePath, err => console.log(err));
+};
